@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+		Nenhuma vacinação encontrada, para cadastrar clique em cadastrar no menu superior</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}"
+		th:text="${mensagem}"></div>
+	<div class="card mb-3">
+		<div class="card-header text-white bg-success">
+			<p class="text-info">Filtro vacinação</p>
+		</div>
+		<div class="card body bg-secondary text-white">
+			<form method="GET">
+				<div class="form-group mb-3 pl-3">
+					<label for="nome">Pesquisa por dose: (Digite 1 para primeira dose // Digite 2 para ver os imunizados // Digite 0 para ver todos os pacientes)</label>
+					 <input class="form-control" type="text" name="vacinado" ></input>
+				</div>
+				<button type="submit" class="btn btn-success mb-3">Pesquisar por dose</button>
+			</form>
+		</div>
+	</div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<table class="table table-secondary table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Data da aplicação</th>
+					<th>Pessoa</th>
+					<th>Posto</th>
+					<th>Lote</th>
+					<th>Posologia</th>
+					<th>Status da Vacinação</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="vacinacao : ${lista}">
+					<td th:text="${vacinacao.id}"></td>
+					<td th:text="${#dates.format(vacinacao.aplicacao, 'dd/MM/yyyy')}"></td>
+					<td
+						th:text="${vacinacao.pessoa.cpf + ' - ' + vacinacao.pessoa.nome}"></td>
+					<td th:text="${vacinacao.posto.nome}"></td>
+					<td th:text="${vacinacao.lote.identificacao}"></td>
+					<td th:text="${vacinacao.lote.vacina.dose + ' ' + 'Doses'}"></td>
+					<td th:text="${vacinacao.vacinadoTexto}"></td>
+					<td><a class="btn btn-primary btn"
+						th:href="@{/vacinacao/editar(id=${vacinacao.id})}">Editar</a> <a
+						class="btn btn-danger"
+						th:href="@{/vacinacao/excluir(id=${vacinacao.id})}"
+						onclick="return confirm('Você realmente deseja excluir essa vacinação?')">Excluir</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout.html}"
+>
+<meta charset="UTF-8">
+<div layout:fragment="content">
+
+<h1 th:align= "left">Alguma coisa deu errado &#128531</h1>
+<h2 th:align = "left">Os possíveis erros são:</h2>
+<h6 th:align= "left">&#183 Verifique se a pessoa já está vacinada.</h6>
+<h6 th:align= "left">&#183 O lote não contém mais vacinas.</h6>
+<h6 th:align= "left">&#183 O lote não está dentro do prazo de validade.</h6>
+<h6 th:align= "left">&#183 As vacinas aplicadas nas duas doses devem ser as mesmas.</h6>
+<a style="text-align:center" href="/">Voltar para página inicial</a>
+</div>
+</html>

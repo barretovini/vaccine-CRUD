@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 id="title" class="text-center"
+			style="font-family: 'Corben', Georgia, Times, serif; color: #003302">
+			<b>Bem vindo ao cadastro de vacinação</b>
+		</h1>
+		<h6 class="text-center"
+			style="font-family: 'Nobile', Helvetica, Arial, sans-serif; color: #003302; font-size: 17px">
+			<br>No menu superior você encontra as opções de cadastro e
+			consulta dos itens salvos
+		</h6>
+		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner"style="width: 100; height: 100; margin: 0px 340px; margin-bottom:40px">
+				<div class="carousel-item active">
+					<img class="d-block w-50 h-50" src="https://images.unsplash.com/photo-1618615159724-118c1f47f7ae?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="First slide">
+				</div>
+				<div class="carousel-item">
+					<img class="d-block w-50 h-50" src="https://images.unsplash.com/photo-1616101746997-66ec55fa004f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmFjY2luZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Second slide">
+				</div>
+				<div class="carousel-item">
+					<img class="d-block w-50 h-50" src="https://images.unsplash.com/photo-1612277795511-39caabca8185?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHZhY2NpbmV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Third slide">
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="sr-only"></span>
+			</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="sr-only"></span>
+			</a>
+		</div>
+	</div>
+</body>
+
+<footer>
+	<div layout:fragment="footer">
+		<p class="text-left"
+			style="font-family: 'Nobile', Helvetica, Arial, sans-serif; font-size: 11px;">
+			Projeto criado para estudo dos principios básicos de projetos MVC
+			utilizando SpringBoot<br>©Vinícius Barreto de Oliveira
+		</p>
+	</div>
+</footer>
+</html>

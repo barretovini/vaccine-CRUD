@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+		Nenhum local cadastrada</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}"
+		th:text="${mensagem}"></div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<table class="table table-secondary table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>CEP</th>
+					<th>Rua</th>
+					<th>Numero</th>
+					<th>Complemento</th>
+					<th>Municipio</th>
+					<th>Estado</th>
+					<th>Opções</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="posto : ${lista}">
+					<td th:text="${posto.id}"></td>
+					<td th:text="${posto.nome}"></td>
+					<td th:text="${posto.enderecoPosto.cep}"></td>
+					<td th:text="${posto.enderecoPosto.rua}"></td>
+					<td th:text="${posto.enderecoPosto.numero}"></td>
+					<td th:text="${posto.enderecoPosto.complemento}"></td>
+					<td th:text="${posto.enderecoPosto.municipio}"></td>
+					<td th:text="${posto.enderecoPosto.estado}"></td>
+
+					<td><a class="btn btn-primary btn"
+						th:href="@{/posto/editar(id=${posto.id})}">Editar</a> <a
+						class="btn btn-danger" th:href="@{/posto/excluir(id=${posto.id})}"
+						onclick="return confirm('Você realmente deseja excluir esse local de vacinação?')">Excluir</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<body>
+	<div layout:fragment="content">
+		<div class="alert alert-primary" th:if="${mensagem != null}"
+			th:text="${mensagem}"></div>
+		<div class="card">
+			<div class="card-header">
+				<p class="text-primary">Nova Vacinação</p>
+			</div>
+			<div class="card-body">
+				<form method="POST" th:object="${vacinacao}"
+					th:action="@{/vacinacao/editar}">
+					<input type="hidden" th:field="*{id}">
+					<div class="form-group mb-3">
+						<label for="nome">Data da aplicação:</label> <input
+							class="form-control" type="date" th:field="*{aplicacao}" required></input>
+						<div class="text-danger" th:if="${#fields.hasErrors('aplicacao')}"
+							th:errors="*{aplicacao}"></div>
+					</div>
+					<div class="form-group mb-3">
+						<label for="nome">Pessoa:</label> 
+						<select class="form-select cpf-mask" th:field="*{pessoa}">
+						<option value="" selected disabled>----Selecione o CPF do paciente ----</option>
+							<option th:each="pessoa: ${listaPessoa}" th:value="${pessoa.id}"
+								th:text="${pessoa.cpf}" />
+						</select>
+					</div>
+					<div class="form-group mb-3">
+						<label for="nome">Posto:</label> <select class="form-select"
+							th:field="*{posto}">
+							<option value="" selected disabled>----Selecione o nome do posto de aplicação ----</option>
+							<option th:each="posto: ${listaPosto}" th:value="${posto.id}"
+								th:text="${posto.nome}" />
+						</select>
+					</div>
+					<div class="form-group mb-3">
+						<label for="nome">Lote:</label> <select class="form-select"
+							th:field="*{lote}">
+									<option value="" selected disabled>----Selecione um lote----</option>
+          							<option th:each="lote: ${listaLote}" th:value="${lote.id}" th:text="${lote.identificacao}"></option>
+							
+						</select>
+					</div>
+					<div class="form-group mb-3">
+						<label for="nome">Doses a serem aplicadas:</label> <select
+							class="form-control" name="vacina" id="vacina">
+							<option value="" selected disabled hidden=true>----Selecione primeiro um lote----</option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-success">Salvar Vacinação</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+<script>
+	$("#lote").change(function() {
+		let vacina = $('#vacina');
+		vacina.empty();
+			const url = '/vacina/listarPorLote?idLotes='+ $("#lote").val();
+				$.getJSON(url, function(data) {
+					$.each(data, function(key, objeto) {
+						vacina.append($('<option></option>').attr('value', objeto.id).text(objeto.dose));
+							})
+						});
+					});
+</script>

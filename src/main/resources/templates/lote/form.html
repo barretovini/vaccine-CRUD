@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}">
+	</div>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Novo Lote</p>
+		</div>
+		<div class="card-body">
+			<form method="POST" th:object="${lote}" th:action="@{/lote/editar}">
+				<input type="hidden" th:field="*{id}">
+				<div class="form-group mb-3">
+					<label for="nome">Vacina:</label>
+					<select class="form-select" th:field="*{vacina}">
+						<option th:each="vacina: ${listaVacina}" th:value="${vacina.id}" th:text="${vacina.nome}" />
+					</select>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nome">Número de lote:</label> <input class="form-control"
+						step="1" min="00000" type="number" th:field="*{identificacao}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('identificacao')}"
+						th:errors="*{identificacao}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nome">Quantidade de vacinas recebidas na compra do lote:</label> <input class="form-control"
+						step="1" min="0" type="number" th:field="*{quantidadeRecebida}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('quantidadeRecebida')}"
+						th:errors="*{quantidadeRecebida}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nome">Quantidade de vacinas restantes:</label> <input class="form-control"
+						step="1" min="0" type="number" th:field="*{quantidadeRestante}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('quantidadeRestante')}"
+						th:errors="*{quantidadeRestante}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nome">Data do recebimento:</label> <input class="form-control"
+						type="date" th:field="*{recebimento}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('recebimento')}"
+						th:errors="*{recebimento}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nome">Data de validade:</label> <input class="form-control"
+						type="date" th:field="*{validade}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('validade')}"
+						th:errors="*{validade}"></div>
+				</div>
+				
+				<button type="submit" class="btn btn-success">Salvar Lote</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+</html>

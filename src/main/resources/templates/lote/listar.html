@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+		Nenhum lote cadastrado
+	</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<table class="table table-secondary table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Vacina</th>
+					<th>Número do lote</th>
+					<th>Quantidade Recebida</th>
+					<th>Quantidade Restante</th>
+					<th>Data de recebimento </th>
+					<th>Data de validade</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="lote : ${lista}">
+					<td th:text="${lote.id}"></td>
+					<td th:text="${lote.vacina.nome}"></td>
+					<td th:text="${lote.identificacao}"></td>
+					<td th:text="${lote.quantidadeRecebida} + ' Vacinas'"></td>
+					<td th:text="${lote.quantidadeRestante} + ' Vacinas'"></td>
+					<td th:text="${#dates.format(lote.recebimento, 'dd/MM/yyyy')}"></td>	
+					<td th:text="${#dates.format(lote.validade, 'dd/MM/yyyy')}"></td>	
+					<td><a class="btn btn-primary btn" th:href="@{/lote/editar(id=${lote.id})}">Editar</a>
+					<a class="btn btn-danger" th:href="@{/lote/excluir(id=${lote.id})}" onclick="return confirm('Você realmente deseja excluir esse lote?')">Excluir</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</html>
